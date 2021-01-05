@@ -48,12 +48,22 @@ class Song
 
   def self.new_from_filename(filename)
     new_song = Song.new
-    name_and_artist = filename.split(/[.-]/)
-    name_and_artist[0] = new_song.artist_name
-    name_and_artist[2] = new_song.name
-    binding.pry
+    name_and_artist = []
+    name_and_artist = filename.split(/[\.-]./)
+    new_song.artist_name = name_and_artist[0].chop
+    new_song.name = name_and_artist[1]
     new_song
   end
 
+  def self.create_from_filename(filename)
+    created_song = new_from_filename(filename)
+    created_song.save
+    created_song
+  end
 
+  def self.destroy_all
+    self.all.clear
+    self.all
+  end
+  
 end
